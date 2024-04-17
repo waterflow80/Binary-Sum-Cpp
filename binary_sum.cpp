@@ -2,8 +2,8 @@
 
 using namespace std;
 
-const int SIZE = pow(2,20);
-const int cIn=0; // Initial carry in 
+const int SIZE = pow(2,6);
+const int cIn=1; // Initial carry in 
 
 bool A[SIZE];
 bool B[SIZE];
@@ -18,12 +18,12 @@ int add_A_and_B(bool* A, bool* B, bool cin, int level, int start, int end);
 int main() {
 	int resCarry;
 	init();
-	//display_array(A, SIZE);
-	//display_array(B, SIZE);
+	display_array(A, SIZE);
+	display_array(B, SIZE);
 	cout << "Cin=" << cIn << endl;
 	resCarry = add_A_and_B(A, B, cIn, SIZE-1, 0, SIZE-1);
 	cout << "--------- Finished. Sum: \n";
-	//display_array(S, SIZE);
+	display_array(S, SIZE);
 	cout << "Carray = " << resCarry << endl;
 
 
@@ -46,12 +46,10 @@ int add_binary(bool a, bool b, bool cin, bool* s) {
  * and making the sum recursively.
  * level: initially = SIZE-1*/
 int add_A_and_B(bool* A, bool* B, bool cin, int level, int start, int end) {
-	if (start == end) {
-	//	cout << "Adding into sum[" << start << "],";
+	if (start == end)
 		// atomic addition between two bits
 		return add_binary(A[start], B[start], cin, &S[start]);
-	
-	}
+		// else
 		return add_A_and_B(A, 
 				B, 
 				add_A_and_B(A, B, cin, level-1, (start+end)/2+1, end),
